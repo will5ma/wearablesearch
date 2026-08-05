@@ -238,6 +238,66 @@
     .intro-body p + p { margin-top: 20px; }
     .intro-body strong { color: var(--text); font-weight: 600; }
 
+    /* Instructor */
+    .instructor-card {
+      display: flex;
+      align-items: center;
+      gap: 32px;
+      padding: 36px;
+    }
+    .instructor-photo {
+      width: 130px;
+      height: auto;
+      flex-shrink: 0;
+      border-radius: var(--r-card);
+      background: rgba(255,255,255,0.03);
+      border: 1px solid var(--border);
+      padding: 8px;
+    }
+    .instructor-info { flex: 1; min-width: 0; }
+    .instructor-name {
+      font-family: 'Syne', sans-serif;
+      font-weight: 700;
+      font-size: 21px;
+      margin-bottom: 2px;
+    }
+    .instructor-role {
+      font-size: 13.5px;
+      color: var(--accent1);
+      font-weight: 600;
+      margin-bottom: 14px;
+    }
+    .instructor-bio {
+      font-size: 15px;
+      color: var(--text-muted);
+      line-height: 1.7;
+      margin-bottom: 18px;
+    }
+    .instructor-badges {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 18px;
+    }
+    .instructor-badge {
+      font-size: 12.5px;
+      padding: 5px 12px;
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      color: var(--text-muted);
+      background: rgba(255,255,255,0.02);
+    }
+    .instructor-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--accent1);
+      transition: gap 0.2s var(--ease);
+    }
+    .instructor-link:hover { gap: 10px; }
+
     /* Schedule */
     .schedule-badge {
       display: inline-flex;
@@ -400,6 +460,8 @@
     @media (max-width: 768px) {
       section.block { padding: 48px 0; }
       #course-hero { padding: 48px 0 40px; }
+      .instructor-card { flex-direction: column; text-align: center; padding: 28px; }
+      .instructor-badges { justify-content: center; }
       .schedule-grid { grid-template-columns: repeat(2, 1fr); }
       .audience-grid { grid-template-columns: 1fr; }
       .curr-title { font-size: 19px; }
@@ -466,6 +528,39 @@
         <p>이 강좌는 단순히 프롬프트를 배우는 과정이 아닙니다.</p>
         <p>직장상사가 프롬프트를 알려달라고 하면, 프롬프트 대신 이 강좌를 추천하십시오.</p>
         <p>Claude와 함께 일하는 방법을 익히고,<br />실제 업무와 학습에 활용할 수 있는 <strong>AI Fluency</strong>를 목표로 합니다.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 강사 소개 -->
+  <section class="block" id="instructor" aria-labelledby="instructor-title">
+    <div class="container">
+      <div class="section-header fade-up">
+        <div class="section-label">INSTRUCTOR</div>
+        <h2 class="section-title" id="instructor-title">강사 소개</h2>
+      </div>
+
+      <div class="glass-card instructor-card fade-up">
+        <img src="instructor.png" alt="마정호 강사 프로필" class="instructor-photo" />
+        <div class="instructor-info">
+          <div class="instructor-name">마정호</div>
+          <div class="instructor-role">Wearable Search 대표</div>
+          <p class="instructor-bio">
+            27년 이상의 대기업 연구개발·마케팅 경험을 바탕으로,<br />
+            데이터와 기술로 기업의 성장을 설계하는 마케팅 전략가입니다.
+          </p>
+          <div class="instructor-badges" role="list" aria-label="주요 이력">
+            <span class="instructor-badge" role="listitem">크라우드펀딩 목표 1,717% 달성</span>
+            <span class="instructor-badge" role="listitem">특허 13건 보유</span>
+            <span class="instructor-badge" role="listitem">2025 올해의 블로그 선정</span>
+          </div>
+          <a href="https://will5ma.github.io/TutorHome/" target="_blank" rel="noopener noreferrer" class="instructor-link" aria-label="강사 프로필 자세히 보기">
+            강사 프로필 자세히 보기
+            <svg width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+              <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </a>
+        </div>
       </div>
     </div>
   </section>
