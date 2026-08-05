@@ -310,12 +310,50 @@
     }
     .hero-headline .accent { color: var(--accent1); }
 
+    .hero-kicker {
+      font-family: 'Syne', sans-serif;
+      font-weight: 700;
+      font-size: clamp(17px, 2vw, 20px);
+      color: var(--text-muted);
+      margin-bottom: 10px;
+    }
+
     .hero-sub {
       color: var(--text-muted);
       font-size: clamp(16px, 2vw, 19px);
       max-width: 560px;
       line-height: 1.7;
-      margin-bottom: 48px;
+      margin-bottom: 32px;
+    }
+    .hero-sub strong {
+      color: var(--text);
+      font-weight: 700;
+    }
+
+    .hero-schedule {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+      padding: 14px 20px;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      background: rgba(255,255,255,0.02);
+      margin-bottom: 40px;
+      width: fit-content;
+    }
+    .hero-schedule-date {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--text);
+    }
+    .hero-schedule-divider {
+      color: var(--text-muted);
+      opacity: 0.5;
+    }
+    .hero-schedule-recur {
+      font-size: 14px;
+      color: var(--text-muted);
     }
 
     .hero-ctas {
@@ -358,6 +396,9 @@
       font-weight: 500;
       color: var(--text);
       margin-bottom: 4px;
+    }
+    .stat-value.stat-value-text {
+      font-size: clamp(20px, 2.6vw, 26px);
     }
     .stat-label {
       font-size: 13px;
@@ -990,6 +1031,8 @@
       .nav-hamburger { display: flex; }
 
       #hero { padding: 80px 0 60px; }
+      .hero-schedule { flex-direction: column; align-items: flex-start; gap: 2px; }
+      .hero-schedule-divider { display: none; }
       .hero-stats { grid-template-columns: 1fr; }
       .stat-item { padding: 24px 20px; }
 
@@ -1062,40 +1105,48 @@
   <div class="container">
     <div class="hero-badge fade-up">
       <span class="hero-badge-dot" aria-hidden="true"></span>
-      시장조사 플랫폼
+      🎓 Claude AI 온라인 강좌
     </div>
 
+    <p class="hero-kicker fade-up">클로드와 함께 시작하기</p>
+
     <h1 class="hero-headline fade-up" id="hero-headline">
-      찾지 않아도<br />
-      <span class="accent">찾아온다.</span>
+      기초에서 중급으로의<br />
+      <span class="accent">나 혼자만 레벨업</span>
     </h1>
 
     <p class="hero-sub fade-up">
-      달리는 동안, 회의 중에도, 잠드는 순간에도<br />— 당신의 데이터는 연결됩니다
+      AI를 챗봇이 아닌 <strong>협업 에이전트</strong>로 활용하는<br />4주 실습 중심 Claude AI 강좌
     </p>
 
+    <div class="hero-schedule fade-up" role="group" aria-label="강좌 일정">
+      <span class="hero-schedule-date">📅 2026년 8월 12일 ~ 9월 2일</span>
+      <span class="hero-schedule-divider" aria-hidden="true">|</span>
+      <span class="hero-schedule-recur">매주 수요일 (총 4회)</span>
+    </div>
+
     <div class="hero-ctas fade-up">
-      <a href="#subscribe" class="btn btn-primary" aria-label="리포트 문의하기">
-        리포트 문의하기
+      <a href="#" class="btn btn-primary" aria-label="강의 신청하기">
+        강의 신청하기
         <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
           <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
         </svg>
       </a>
-      <a href="#insights" class="btn btn-outline">최신 인사이트</a>
+      <a href="course.html" class="btn btn-outline">강좌 자세히 보기</a>
     </div>
 
-    <div class="hero-stats fade-up" role="list" aria-label="시장 규모 통계">
+    <div class="hero-stats fade-up" role="list" aria-label="강좌 하이라이트">
       <div class="stat-item" role="listitem">
-        <div class="stat-value font-mono" data-target="238" data-prefix="$" data-suffix="B" aria-label="2026 글로벌 웨어러블 시장 2380억 달러">$0B</div>
-        <div class="stat-label">2026 글로벌 웨어러블 시장</div>
+        <div class="stat-value font-mono" data-target="4" data-suffix="주" aria-label="4주 과정">0주</div>
+        <div class="stat-label">실습 중심 온라인 강의</div>
       </div>
       <div class="stat-item" role="listitem">
-        <div class="stat-value font-mono" data-target="55" data-suffix="%" aria-label="AI 탑재 웨어러블 비중 55%">0%</div>
-        <div class="stat-label">AI 탑재 웨어러블 비중</div>
+        <div class="stat-value font-mono" data-target="7" data-suffix="+" aria-label="7개 이상">0+</div>
+        <div class="stat-label">Claude 핵심 기능 학습</div>
       </div>
       <div class="stat-item" role="listitem">
-        <div class="stat-value font-mono" data-target="87" data-suffix="%" aria-label="신뢰 브랜드 추가 지불 의향 87%">0%</div>
-        <div class="stat-label">신뢰 브랜드에 추가 지불 의향</div>
+        <div class="stat-value stat-value-text font-mono" aria-label="Claude Code">Claude Code</div>
+        <div class="stat-label">AI 에이전트 입문</div>
       </div>
     </div>
   </div>
@@ -1154,7 +1205,7 @@
     </div>
 
     <div class="section-bottom-link fade-up" style="margin-top:40px;">
-      <a href="https://wearablesearch.tistory.com" target="_blank" rel="noopener noreferrer" aria-label="블로그에서 더 보기">
+      <a href="https://blog.naver.com/PostList.naver?blogId=geekstarter&categoryNo=1&parentCategoryNo=1&skinType=&skinId=&from=menu" target="_blank" rel="noopener noreferrer" aria-label="블로그에서 더 보기">
         블로그에서 더 보기
         <svg width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true">
           <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
