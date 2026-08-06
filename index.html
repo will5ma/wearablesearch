@@ -785,39 +785,8 @@
       font-family: 'Syne', sans-serif;
       font-weight: 800;
       font-size: clamp(28px, 4vw, 44px);
-      margin-bottom: 16px;
-    }
-    .subscribe-sub {
-      color: var(--text-muted);
-      font-size: 17px;
-      margin-bottom: 40px;
-    }
-    .subscribe-form {
-      display: flex;
-      gap: 12px;
-      max-width: 480px;
-      margin: 0 auto 16px;
-    }
-    .subscribe-input {
-      flex: 1;
-      background: var(--bg);
-      border: 1px solid var(--border);
-      border-radius: var(--r-btn);
-      padding: 14px 20px;
-      color: var(--text);
-      font-size: 15px;
-      font-family: inherit;
-      outline: none;
-      transition: border-color 0.2s;
-    }
-    .subscribe-input::placeholder { color: var(--text-muted); }
-    .subscribe-input:focus {
-      border-color: var(--accent1);
-      box-shadow: 0 0 0 3px rgba(0,229,192,0.08);
-    }
-    .subscribe-notice {
-      font-size: 13px;
-      color: var(--text-muted);
+      line-height: 1.4;
+      margin-bottom: 32px;
     }
 
     /* ═══════════════════════════════════════
@@ -925,7 +894,6 @@
       #insights, #funding, #kc, #roadmap, #subscribe { padding: 72px 0; }
 
       .subscribe-inner { padding: 48px 24px; }
-      .subscribe-form { flex-direction: column; }
 
       .footer-top { grid-template-columns: 1fr; gap: 32px; }
 
@@ -1009,7 +977,7 @@
     </div>
 
     <div class="hero-ctas fade-up">
-      <a href="https://forms.gle/QXRvepyJ5HsKwgDVA" target="_blank" rel="noopener noreferrer" class="btn btn-primary" aria-label="강의 신청하기">
+      <a href="https://forms.gle/tK8r1CM1stfHhcpS8" target="_blank" rel="noopener noreferrer" class="btn btn-primary" aria-label="강의 신청하기">
         강의 신청하기
         <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
           <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
@@ -1285,24 +1253,13 @@
 <section id="subscribe" aria-labelledby="subscribe-title">
   <div class="container">
     <div class="subscribe-inner fade-up">
-      <h2 class="subscribe-headline" id="subscribe-title">먼저 알고 싶다면,<br />구독하세요</h2>
-      <p class="subscribe-sub">매주 화요일, 웨어러블 산업의 핵심만 정리해 드립니다</p>
-
-      <form class="subscribe-form" onsubmit="handleSubscribe(event)" aria-label="뉴스레터 구독 폼">
-        <label for="email" class="sr-only">이메일 주소</label>
-        <input
-          type="email"
-          id="email"
-          class="subscribe-input"
-          placeholder="your@email.com"
-          required
-          aria-label="이메일 주소 입력"
-          autocomplete="email"
-        />
-        <button type="submit" class="btn btn-primary">구독하기</button>
-      </form>
-
-      <p class="subscribe-notice" aria-live="polite">스팸 없음. 언제든 구독 취소 가능.</p>
+      <h2 class="subscribe-headline" id="subscribe-title">지금 바로 4주 동안<br />Claude AI를 제대로 배우는 여정을 시작하세요.</h2>
+      <a href="https://forms.gle/tK8r1CM1stfHhcpS8" target="_blank" rel="noopener noreferrer" class="btn btn-primary" aria-label="강의 신청하기" style="position:relative;">
+        강의 신청하기
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+          <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </a>
     </div>
   </div>
 </section>
@@ -1503,24 +1460,6 @@
     if (e.key === 'Enter') handleSearch();
   });
 
-  /* ─── Subscribe Form ─── */
-  function handleSubscribe(e) {
-    e.preventDefault();
-    const email = document.getElementById('email').value;
-    const notice = document.querySelector('.subscribe-notice');
-    const btn = e.target.querySelector('button[type=submit]');
-    btn.textContent = '구독 완료!';
-    btn.style.background = 'var(--accent2)';
-    notice.textContent = `${email} 주소로 확인 메일이 발송됩니다.`;
-    notice.style.color = 'var(--accent1)';
-    document.getElementById('email').value = '';
-    setTimeout(() => {
-      btn.textContent = '구독하기';
-      btn.style.background = '';
-      notice.textContent = '스팸 없음. 언제든 구독 취소 가능.';
-      notice.style.color = '';
-    }, 4000);
-  }
 </script>
 
 </body>
