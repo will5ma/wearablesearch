@@ -1,12 +1,17 @@
 """
-웨어러블서치 IT 뉴스 카드 자동 업데이트 스크립트
+웨어러블서치 카드 자동 업데이트 스크립트
 
-wearablesearch.tistory.com/rss 에서 최신 포스트 3개를 가져와
-index.html 의 <!-- NEWS_CARDS_START --> ~ <!-- NEWS_CARDS_END --> 사이를 교체합니다.
+rss.blog.naver.com/geekstarter.xml 에서 최신 글을 가져와
+index.html 의 두 영역을 교체합니다.
+
+  - IT 뉴스 카드   : 카테고리에 'IT'가 포함된 글 (크라우드펀딩 제외) → 매일 새벽 3시
+  - 펀딩 인사이트 카드: 카테고리에 '크라우드'가 포함된 글           → 매일 아침 7시
 
 사용법:
-  python update_news.py              # 기본 실행
-  python update_news.py --dry-run    # HTML 파일 수정 없이 결과만 출력
+  python update_news.py                    # news + funding 모두 실행
+  python update_news.py --target=news      # IT 뉴스 카드만 갱신
+  python update_news.py --target=funding   # 펀딩 인사이트 카드만 갱신
+  python update_news.py --dry-run          # HTML 파일 수정 없이 결과만 출력
 """
 
 import urllib.request
@@ -18,21 +23,29 @@ from datetime import datetime
 from pathlib import Path
 
 # ── 설정 ──────────────────────────────────────────────
-RSS_URL   = "https://wearablesearch.tistory.com/rss"
+RSS_URL   = "https://rss.blog.naver.com/geekstarter.xml"
 HTML_FILE = Path(__file__).parent / "index.html"
 MAX_CARDS = 3
 EXCERPT_LEN = 115
 
-CATEGORY_MAP = {
-    "IT 소식":    ("IT",      "tag-market"),
-    "크라우드펀딩": ("FUNDING", "tag-health"),
-    "웨어러블":   ("WEARABLE","tag-trend"),
-    "리뷰":       ("REVIEW",  "tag-trend"),
+SECTIONS = {
+    "news": {
+        "category_keyword": "IT",
+        "tag_label": "IT",
+        "tag_class": "tag-market",
+        "id_prefix": "card-title",
+        "start_marker": "<!-- NEWS_CARDS_START -->",
+        "end_marker":   "<!-- NEWS_CARDS_END -->",
+    },
+    "funding": {
+        "category_keyword": "크라우드",
+        "tag_label": "FUNDING",
+        "tag_class": "tag-health",
+        "id_prefix": "funding-title",
+        "start_marker": "<!-- FUNDING_CARDS_START -->",
+        "end_marker":   "<!-- FUNDING_CARDS_END -->",
+    },
 }
-DEFAULT_TAG = ("TECH", "tag-trend")
-
-START_MARKER = "<!-- NEWS_CARDS_START -->"
-END_MARKER   = "<!-- NEWS_CARDS_END -->"
 # ──────────────────────────────────────────────────────
 
 
@@ -63,29 +76,35 @@ def esc(s: str) -> str:
              .replace('"', "&quot;"))
 
 
-def parse_items(xml_bytes: bytes) -> list[dict]:
+def parse_items(xml_bytes: bytes, category_keyword: str) -> list[dict]:
     root = ET.fromstring(xml_bytes)
-    items = []
+    matched = []
     for item in root.findall(".//item"):
-        items.append({
+        category = clean(item.findtext("category", "") or "")
+        if category_keyword not in category:
+            continue
+        link = (item.findtext("guid", "") or item.findtext("link", "") or "").strip()
+        link = link.split("?")[0]
+        matched.append({
             "title":       clean(item.findtext("title", "")),
-            "link":        (item.findtext("link", "") or "").strip(),
+            "link":        link,
             "description": excerpt(item.findtext("description", "")),
-            "category":    (item.findtext("category", "IT 소식") or "").strip(),
+            "category":    category,
         })
-    return items[:MAX_CARDS]
+        if len(matched) >= MAX_CARDS:
+            break
+    return matched
 
 
-def build_cards_html(items: list[dict]) -> str:
+def build_cards_html(items: list[dict], tag_label: str, tag_class: str, id_prefix: str) -> str:
     delays = ["", ' style="transition-delay:0.1s"', ' style="transition-delay:0.2s"']
     cards = []
     for i, item in enumerate(items):
-        tag_label, tag_class = CATEGORY_MAP.get(item["category"], DEFAULT_TAG)
         delay = delays[i] if i < len(delays) else ""
         cards.append(
-            f'      <article class="glass-card insight-card fade-up" aria-labelledby="card-title-{i+1}"{delay}>\n'
+            f'      <article class="glass-card insight-card fade-up" aria-labelledby="{id_prefix}-{i+1}"{delay}>\n'
             f'        <span class="card-tag {tag_class}">{tag_label}</span>\n'
-            f'        <h3 class="card-title" id="card-title-{i+1}">{esc(item["title"])}</h3>\n'
+            f'        <h3 class="card-title" id="{id_prefix}-{i+1}">{esc(item["title"])}</h3>\n'
             f'        <p class="card-excerpt">{esc(item["description"])}</p>\n'
             f'        <a href="{esc(item["link"])}" class="card-link" target="_blank"\n'
             f'           rel="noopener noreferrer" aria-label="{esc(item["title"])} 읽기">\n'
@@ -99,50 +118,72 @@ def build_cards_html(items: list[dict]) -> str:
     return "\n".join(cards)
 
 
-def update_html(cards_html: str, dry_run: bool = False) -> bool:
-    content = HTML_FILE.read_text(encoding="utf-8")
-
+def update_html(content: str, cards_html: str, start_marker: str, end_marker: str) -> tuple[str, bool]:
     pattern = re.compile(
-        re.escape(START_MARKER) + r".*?" + re.escape(END_MARKER),
+        re.escape(start_marker) + r".*?" + re.escape(end_marker),
         re.DOTALL,
     )
     if not pattern.search(content):
         raise RuntimeError(
             f"마커를 찾을 수 없습니다. index.html에 "
-            f"'{START_MARKER}' 와 '{END_MARKER}' 가 있는지 확인하세요."
+            f"'{start_marker}' 와 '{end_marker}' 가 있는지 확인하세요."
         )
 
-    replacement = f"{START_MARKER}\n{cards_html}\n      {END_MARKER}"
+    replacement = f"{start_marker}\n{cards_html}\n      {end_marker}"
     new_content = pattern.sub(replacement, content)
-
-    if new_content == content:
-        print("변경 없음 — 콘텐츠가 동일합니다.")
-        return False
-
-    if not dry_run:
-        HTML_FILE.write_text(new_content, encoding="utf-8")
-        print(f"✓ {HTML_FILE.name} 업데이트 완료")
-    else:
-        print("[DRY RUN] 변경될 카드 HTML:")
-        print(cards_html)
-    return True
+    return new_content, new_content != content
 
 
-def main():
-    dry_run = "--dry-run" in sys.argv
-    now = datetime.now().strftime("%Y-%m-%d %H:%M")
-    print(f"[{now}] RSS 피드 가져오는 중... {RSS_URL}")
+def run_section(name: str, content: str, xml_bytes: bytes, dry_run: bool) -> tuple[str, bool]:
+    cfg = SECTIONS[name]
+    items = parse_items(xml_bytes, cfg["category_keyword"])
 
-    xml_bytes = fetch_rss()
-    items = parse_items(xml_bytes)
-
-    print(f"  포스트 {len(items)}개 파싱 완료:")
+    print(f"[{name}] 포스트 {len(items)}개 파싱 완료:")
     for item in items:
         print(f"  - [{item['category']}] {item['title']}")
 
-    cards_html = build_cards_html(items)
-    changed = update_html(cards_html, dry_run=dry_run)
-    return 0 if changed or dry_run else 0
+    cards_html = build_cards_html(items, cfg["tag_label"], cfg["tag_class"], cfg["id_prefix"])
+    new_content, changed = update_html(content, cards_html, cfg["start_marker"], cfg["end_marker"])
+
+    if dry_run:
+        print(f"[{name}] [DRY RUN] 변경될 카드 HTML:")
+        print(cards_html)
+
+    return new_content, changed
+
+
+def main():
+    args = sys.argv[1:]
+    dry_run = "--dry-run" in args
+    target = "all"
+    for a in args:
+        if a.startswith("--target="):
+            target = a.split("=", 1)[1]
+
+    targets = list(SECTIONS.keys()) if target == "all" else [target]
+    for t in targets:
+        if t not in SECTIONS:
+            print(f"알 수 없는 --target 값: {t} (news, funding, all 중 선택)")
+            return 1
+
+    now = datetime.now().strftime("%Y-%m-%d %H:%M")
+    print(f"[{now}] RSS 피드 가져오는 중... {RSS_URL} (target={target})")
+    xml_bytes = fetch_rss()
+
+    content = HTML_FILE.read_text(encoding="utf-8")
+    any_changed = False
+    for t in targets:
+        content, changed = run_section(t, content, xml_bytes, dry_run)
+        any_changed = any_changed or changed
+
+    if not dry_run:
+        if any_changed:
+            HTML_FILE.write_text(content, encoding="utf-8")
+            print(f"✓ {HTML_FILE.name} 업데이트 완료")
+        else:
+            print("변경 없음 — 콘텐츠가 동일합니다.")
+
+    return 0
 
 
 if __name__ == "__main__":

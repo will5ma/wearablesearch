@@ -470,119 +470,6 @@
       position: relative;
       z-index: 1;
     }
-    .funding-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 20px;
-      margin-bottom: 40px;
-    }
-    .funding-card {
-      padding: 32px;
-    }
-    .funding-card-header {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 11px;
-      font-weight: 500;
-      letter-spacing: 0.1em;
-      padding-bottom: 16px;
-      margin-bottom: 20px;
-      border-bottom: 1px solid var(--border);
-    }
-    .funding-card:nth-child(1) .funding-card-header { color: var(--accent1); }
-    .funding-card:nth-child(2) .funding-card-header { color: var(--accent2); }
-    .funding-card:nth-child(3) .funding-card-header { color: var(--warn); }
-
-    .funding-card:hover {
-      border-color: transparent;
-    }
-    .funding-card:nth-child(1):hover { box-shadow: 0 0 24px rgba(0,229,192,0.12); border-color: var(--accent1); }
-    .funding-card:nth-child(2):hover { box-shadow: 0 0 24px rgba(99,102,241,0.12); border-color: var(--accent2); }
-    .funding-card:nth-child(3):hover { box-shadow: 0 0 24px rgba(245,158,11,0.12); border-color: var(--warn); }
-
-    .funding-product-name {
-      font-family: 'Syne', sans-serif;
-      font-weight: 700;
-      font-size: 20px;
-      margin-bottom: 8px;
-    }
-    .funding-product-meta {
-      color: var(--text-muted);
-      font-size: 13px;
-      margin-bottom: 16px;
-    }
-    .funding-amount {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 28px;
-      font-weight: 500;
-      color: var(--accent1);
-      margin-bottom: 4px;
-    }
-    .funding-percent {
-      font-size: 13px;
-      color: var(--text-muted);
-      margin-bottom: 20px;
-    }
-    .funding-bar-wrap {
-      height: 4px;
-      background: var(--border);
-      border-radius: 2px;
-      margin-bottom: 20px;
-      overflow: hidden;
-    }
-    .funding-bar {
-      height: 100%;
-      border-radius: 2px;
-      background: var(--accent1);
-      transition: width 1.2s var(--ease);
-    }
-
-    /* Success Rate Bars */
-    .success-rates { display: flex; flex-direction: column; gap: 16px; }
-    .rate-row { display: flex; flex-direction: column; gap: 6px; }
-    .rate-label-row {
-      display: flex;
-      justify-content: space-between;
-      font-size: 13px;
-    }
-    .rate-label { color: var(--text-muted); }
-    .rate-value { font-family: 'JetBrains Mono', monospace; color: var(--text); }
-    .rate-bar-wrap {
-      height: 6px;
-      background: var(--border);
-      border-radius: 3px;
-      overflow: hidden;
-    }
-    .rate-bar {
-      height: 100%;
-      border-radius: 3px;
-      transition: width 1.4s var(--ease);
-    }
-
-    .funding-insight-body {
-      font-size: 15px;
-      color: var(--text-muted);
-      line-height: 1.7;
-    }
-    .funding-insight-highlight {
-      font-family: 'Syne', sans-serif;
-      font-size: 18px;
-      font-weight: 700;
-      color: var(--text);
-      margin-bottom: 12px;
-    }
-
-    .funding-cta {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      font-size: 14px;
-      font-weight: 600;
-      color: var(--accent1);
-      transition: gap 0.2s var(--ease);
-      margin-top: 20px;
-    }
-    .funding-cta:hover { gap: 10px; }
-
     .section-bottom-link {
       text-align: center;
       margin-top: 8px;
@@ -1015,7 +902,7 @@
        RESPONSIVE
     ═══════════════════════════════════════ */
     @media (max-width: 1024px) {
-      .cards-grid, .funding-grid { grid-template-columns: repeat(2, 1fr); }
+      .cards-grid { grid-template-columns: repeat(2, 1fr); }
       .kc-inner { grid-template-columns: 1fr; }
       .kc-stats { flex-direction: row; flex-wrap: wrap; }
       .kc-stat-card { flex: 1; min-width: 180px; }
@@ -1033,7 +920,7 @@
       .hero-stats { grid-template-columns: 1fr; }
       .stat-item { padding: 24px 20px; }
 
-      .cards-grid, .funding-grid { grid-template-columns: 1fr; }
+      .cards-grid { grid-template-columns: 1fr; }
 
       #insights, #funding, #kc, #roadmap, #subscribe { padding: 72px 0; }
 
@@ -1155,7 +1042,7 @@
   <div class="container">
     <div class="section-header fade-up">
       <div class="section-label">INSIGHTS</div>
-      <h2 class="section-title" id="insights-title">오늘의 IT시장 인사이트</h2>
+      <h2 class="section-title" id="insights-title">오늘의 IT, AI 시장 인사이트</h2>
       <p class="section-sub">데이터로 검증된 시장 동향. 우리의 관점으로 정리합니다.</p>
     </div>
 
@@ -1165,7 +1052,7 @@
         <span class="card-tag tag-market">IT</span>
         <h3 class="card-title" id="card-title-1">다윈의 예언, 중국 고산식물 '삭시프라가' 육식성으로 확인?!</h3>
         <p class="card-excerpt">Scientists have confirmed that the alpine plant Saxifraga candelabrum is truly carnivorous, proving a hypothesis Ch...</p>
-        <a href="https://wearablesearch.tistory.com/2355" class="card-link" target="_blank"
+        <a href="https://blog.naver.com/geekstarter/224368531842" class="card-link" target="_blank"
            rel="noopener noreferrer" aria-label="다윈의 예언, 중국 고산식물 '삭시프라가' 육식성으로 확인?! 읽기">
           READ
           <svg width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true">
@@ -1174,11 +1061,11 @@
         </a>
       </article>
       <article class="glass-card insight-card fade-up" aria-labelledby="card-title-2" style="transition-delay:0.1s">
-        <span class="card-tag tag-health">FUNDING</span>
-        <h3 class="card-title" id="card-title-2">블루투스 5.3 하이파이의 투명 프레임 CD플레이어 'SYITREN RM1'</h3>
-        <p class="card-excerpt">이 글은 아래 링크로 후원시에 크라우드 펀딩 창작자로부터 수수료를 지급 받습니다. https://youtu.be/WNJq2wsKcLk ✅ 투명 아크릴 프레임에 CD를 끼워 벽과 책상에 거치형 CD 플레이어...</p>
-        <a href="https://wearablesearch.tistory.com/2354" class="card-link" target="_blank"
-           rel="noopener noreferrer" aria-label="블루투스 5.3 하이파이의 투명 프레임 CD플레이어 'SYITREN RM1' 읽기">
+        <span class="card-tag tag-market">IT</span>
+        <h3 class="card-title" id="card-title-2">애플, MS 요청에 아이폰과 윈도우 클립보드 공유 추진</h3>
+        <p class="card-excerpt">Apple has agreed to develop a feature that lets iPhone users copy and paste content directly with Windows PCs, resp...</p>
+        <a href="https://blog.naver.com/geekstarter/224367926675" class="card-link" target="_blank"
+           rel="noopener noreferrer" aria-label="애플, MS 요청에 아이폰과 윈도우 클립보드 공유 추진 읽기">
           READ
           <svg width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true">
             <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
@@ -1187,10 +1074,10 @@
       </article>
       <article class="glass-card insight-card fade-up" aria-labelledby="card-title-3" style="transition-delay:0.2s">
         <span class="card-tag tag-market">IT</span>
-        <h3 class="card-title" id="card-title-3">애플, MS 요청에 아이폰과 윈도우 클립보드 공유 추진</h3>
-        <p class="card-excerpt">Apple has agreed to develop a feature that lets iPhone users copy and paste content directly with Windows PCs, resp...</p>
-        <a href="https://wearablesearch.tistory.com/2353" class="card-link" target="_blank"
-           rel="noopener noreferrer" aria-label="애플, MS 요청에 아이폰과 윈도우 클립보드 공유 추진 읽기">
+        <h3 class="card-title" id="card-title-3">비자성 산화루테늄, 2나노미터로 살짝 당기자 숨은 '자성' 확인</h3>
+        <p class="card-excerpt">Scientists stretched an ultrathin ruthenium dioxide film to just two nanometers and detected hidden magnetic order,...</p>
+        <a href="https://blog.naver.com/geekstarter/224366526291" class="card-link" target="_blank"
+           rel="noopener noreferrer" aria-label="비자성 산화루테늄, 2나노미터로 살짝 당기자 숨은 '자성' 확인 읽기">
           READ
           <svg width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true">
             <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
@@ -1219,88 +1106,48 @@
     <div class="section-header fade-up">
       <div class="section-label">FUNDING INSIGHTS</div>
       <h2 class="section-title" id="funding-title">크라우드 펀딩 트렌드 리포트</h2>
-      <p class="section-sub">킥스타터·인디고고·와디즈에서 주목받은 웨어러블 프로젝트를 큐레이션합니다</p>
+      <p class="section-sub">킥스타터·인디고고·와디즈에서 주목받은 프로젝트를 큐레이션합니다</p>
     </div>
 
-    <div class="funding-grid">
-      <!-- 이번 달 베스트 -->
-      <article class="glass-card funding-card fade-up" aria-labelledby="funding-title-1">
-        <div class="funding-card-header">MAY 2026 BEST</div>
-        <h3 class="funding-product-name" id="funding-title-1">Halogen Ring Pro</h3>
-        <p class="funding-product-meta">Kickstarter · 스마트 링 · 수면·스트레스 측정</p>
-        <div class="funding-amount font-mono">$2.4M</div>
-        <div class="funding-percent">목표의 <strong>1,340%</strong> 달성 · 28일 남음</div>
-        <div class="funding-bar-wrap">
-          <div class="funding-bar" style="width: 0%" data-width="100%"></div>
-        </div>
-        <p class="card-excerpt">수면 중 혈중 산소 포화도와 코르티솔 패턴을 동시 측정하는 최초의 소비자용 스마트 링. 28일 연속 배터리와 0.9mm 초박형 설계로 착용감 혁신.</p>
-        <a href="#" class="funding-cta" aria-label="전체 리포트 보기">
-          전체 리포트 보기
+    <div class="cards-grid">
+<!-- FUNDING_CARDS_START -->
+      <article class="glass-card insight-card fade-up" aria-labelledby="funding-title-1">
+        <span class="card-tag tag-health">FUNDING</span>
+        <h3 class="card-title" id="funding-title-1">#2259. 블루투스 5.3 하이파이의 투명 프레임 CD플레이어 'SYITREN RM1'</h3>
+        <p class="card-excerpt">이 글은 아래 링크로 후원시에 크라우드 펀딩 창작자로부터 수수료를 지급 받습니다. https://youtu.be/WNJq2wsKcLk ✅ 투명 아크릴 프레임에 CD를 끼워 벽과 책상에 거치형 CD 플레이어...</p>
+        <a href="https://blog.naver.com/geekstarter/224368506276" class="card-link" target="_blank"
+           rel="noopener noreferrer" aria-label="#2259. 블루투스 5.3 하이파이의 투명 프레임 CD플레이어 'SYITREN RM1' 읽기">
+          READ
           <svg width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true">
             <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
           </svg>
         </a>
       </article>
-
-      <!-- 카테고리별 성공률 -->
-      <article class="glass-card funding-card fade-up" style="transition-delay:0.1s" aria-labelledby="funding-title-2">
-        <div class="funding-card-header">SUCCESS RATE</div>
-        <h3 class="funding-product-name" id="funding-title-2">카테고리별 펀딩 성공률</h3>
-        <p class="funding-product-meta">2026년 1~4월 누적 기준 · 3개 플랫폼 합산</p>
-        <div class="success-rates">
-          <div class="rate-row">
-            <div class="rate-label-row">
-              <span class="rate-label">스마트 링</span>
-              <span class="rate-value font-mono">78%</span>
-            </div>
-            <div class="rate-bar-wrap">
-              <div class="rate-bar" style="width:0%" data-width="78%" data-color="#00E5C0"></div>
-            </div>
-          </div>
-          <div class="rate-row">
-            <div class="rate-label-row">
-              <span class="rate-label">스마트워치 · 밴드</span>
-              <span class="rate-value font-mono">54%</span>
-            </div>
-            <div class="rate-bar-wrap">
-              <div class="rate-bar" style="width:0%" data-width="54%" data-color="#6366F1"></div>
-            </div>
-          </div>
-          <div class="rate-row">
-            <div class="rate-label-row">
-              <span class="rate-label">헬스 이어폰</span>
-              <span class="rate-value font-mono">61%</span>
-            </div>
-            <div class="rate-bar-wrap">
-              <div class="rate-bar" style="width:0%" data-width="61%" data-color="#F59E0B"></div>
-            </div>
-          </div>
-          <div class="rate-row">
-            <div class="rate-label-row">
-              <span class="rate-label">AR 글래스 · 헤드웨어</span>
-              <span class="rate-value font-mono">32%</span>
-            </div>
-            <div class="rate-bar-wrap">
-              <div class="rate-bar" style="width:0%" data-width="32%" data-color="#8B8B9E"></div>
-            </div>
-          </div>
-        </div>
-      </article>
-
-      <!-- 이달의 인사이트 -->
-      <article class="glass-card funding-card fade-up" style="transition-delay:0.2s" aria-labelledby="funding-title-3">
-        <div class="funding-card-header">INSIGHT</div>
-        <p class="funding-insight-highlight" id="funding-title-3">왜 스마트 링은 손목보다 빠르게 펀딩에 성공하는가</p>
-        <p class="funding-insight-body">
-          스마트워치 시장이 애플·삼성의 과점 구도로 굳어진 반면, 스마트 링 카테고리는 아직 지배적 브랜드가 없다. 얼리어답터들은 이 공백을 명확히 인지하고, 폼팩터의 차별성과 배터리 수명의 실용성에 강하게 반응한다. 크라우드펀딩 성공률 78%는 이 시장의 수요를 압축해서 보여준다.
-        </p>
-        <a href="#" class="funding-cta" aria-label="전체 분석 읽기">
-          전체 분석 읽기
+      <article class="glass-card insight-card fade-up" aria-labelledby="funding-title-2" style="transition-delay:0.1s">
+        <span class="card-tag tag-health">FUNDING</span>
+        <h3 class="card-title" id="funding-title-2">#2258. 눈부심·블루라이트 걱정 없는 눈건강 5축 LED 스탠드 'L3 Pro'</h3>
+        <p class="card-excerpt">이 글은 아래 링크로 후원시에 크라우드 펀딩 창작자로부터 수수료를 지급 받습니다. https://youtu.be/PYtScSca5NA ✅ 5축 정밀 관절 구조로 데스크 어디든 자유로운 각도 조절 가능 ✅ 최...</p>
+        <a href="https://blog.naver.com/geekstarter/224367865556" class="card-link" target="_blank"
+           rel="noopener noreferrer" aria-label="#2258. 눈부심·블루라이트 걱정 없는 눈건강 5축 LED 스탠드 'L3 Pro' 읽기">
+          READ
           <svg width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true">
             <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
           </svg>
         </a>
       </article>
+      <article class="glass-card insight-card fade-up" aria-labelledby="funding-title-3" style="transition-delay:0.2s">
+        <span class="card-tag tag-health">FUNDING</span>
+        <h3 class="card-title" id="funding-title-3">#2257. 고온 1400도에서 태어난 우유빛 유리의 수제 식기세트 'Milk Glass'</h3>
+        <p class="card-excerpt">이 글은 아래 링크로 후원시에 크라우드 펀딩 창작자로부터 수수료를 지급 받습니다. https://youtu.be/vsY9KGN6YsI ✅ 100년 전통 마쓰가오카 유리공방이 만드는 우유빛 유리 식기 ✅ 1,...</p>
+        <a href="https://blog.naver.com/geekstarter/224366466990" class="card-link" target="_blank"
+           rel="noopener noreferrer" aria-label="#2257. 고온 1400도에서 태어난 우유빛 유리의 수제 식기세트 'Milk Glass' 읽기">
+          READ
+          <svg width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+            <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </a>
+      </article>
+      <!-- FUNDING_CARDS_END -->
     </div>
 
     <div class="section-bottom-link fade-up">
@@ -1407,25 +1254,25 @@
         <div class="timeline-item">
           <div class="timeline-dot" aria-hidden="true"></div>
           <div class="timeline-date">2026 Q2</div>
-          <div class="timeline-title">
-            Blog &amp; Newsletter
-            <span class="timeline-current" aria-label="현재 진행 중">NOW</span>
-          </div>
-          <div class="timeline-desc">주간 웨어러블 인사이트 뉴스레터 발행. 시장 동향·펀딩·기술 분석을 매주 화요일 정리 배송.</div>
+          <div class="timeline-title">Blog &amp; Newsletter</div>
+          <div class="timeline-desc">주간 웨어러블 인사이트 블로그 발행. 시장 동향·펀딩·기술 분석을 정리하여 공개.</div>
         </div>
 
         <div class="timeline-item">
           <div class="timeline-dot" aria-hidden="true"></div>
-          <div class="timeline-date">2026 Q4</div>
-          <div class="timeline-title">KC 인증 DB + 펀딩 인사이트 정식 오픈</div>
-          <div class="timeline-desc">실시간 KC 인증 데이터베이스 서비스 출시 및 크라우드펀딩 트렌드 리포트 정기 발행 시작.</div>
+          <div class="timeline-date">2026 Q3</div>
+          <div class="timeline-title">
+            AI 강좌 정식 오픈
+            <span class="timeline-current" aria-label="현재 진행 중">NOW</span>
+          </div>
+          <div class="timeline-desc">Claude 및 AI를 활용한 마케팅 강의 진행</div>
         </div>
 
         <div class="timeline-item">
           <div class="timeline-dot" aria-hidden="true"></div>
           <div class="timeline-date">2027</div>
           <div class="timeline-title">Wearable Search Index 발간</div>
-          <div class="timeline-desc">한국 웨어러블 시장 최초의 독자적 시장조사 인덱스. 산업 표준 지표로 자리매김을 목표로 합니다.</div>
+          <div class="timeline-desc">IT, AI 시장 최초의 독자적 시장조사 인덱스. 산업 표준 지표로 자리매김을 목표로 합니다.</div>
         </div>
       </div>
     </div>
@@ -1610,22 +1457,6 @@
   }, { threshold: 0.5 });
 
   document.querySelectorAll('[data-target]').forEach(el => counterObserver.observe(el));
-
-  /* ─── Progress bars (funding & rate) ─── */
-  const barObserver = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        const bar = entry.target;
-        const targetWidth = bar.dataset.width;
-        const color = bar.dataset.color;
-        if (color) bar.style.background = color;
-        setTimeout(() => { bar.style.width = targetWidth; }, 100);
-        barObserver.unobserve(bar);
-      }
-    });
-  }, { threshold: 0.4 });
-
-  document.querySelectorAll('[data-width]').forEach(el => barObserver.observe(el));
 
   /* ─── Hero sequential fade-in ─── */
   document.querySelectorAll('#hero .fade-up').forEach((el, i) => {
